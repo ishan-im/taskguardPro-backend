@@ -29,6 +29,12 @@ app.use(express.json());
 
 app.use("/api/v1/users", userRouter);
 
+app.use(cookieParser());
+
+app.use("/", (req, res) => {
+  res.send("Hello from the server");
+});
+
 app.all("*", (req, res, next) => {
   next(new AppError(`Couldn't find ${req.originalUrl} on this server!`, 404));
 });
